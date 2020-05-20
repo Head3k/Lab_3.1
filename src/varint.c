@@ -62,17 +62,17 @@ size_t generate()
 {
 size_t i=0;
 size_t count = 0;
-FILE *f = fopen("../build/uncompressed.dat", "w");
+FILE *f = fopen("build/uncompressed.dat", "w");
 fclose(f);
-f = fopen("../build/compressed.dat", "w");
+f = fopen("build/compressed.dat", "w");
 fclose(f); 
 for (i = 0; i < size; ++i)
 {
 uint32_t r = generate_number(); 
-f = fopen("../build/uncompressed.dat", "a"); 
+f = fopen("build/uncompressed.dat", "a"); 
 fwrite(&r, sizeof(r), 1, f); 
 fclose(f);
-f = fopen("../build/compressed.dat", "a"); 
+f = fopen("build/compressed.dat", "a"); 
 
 uint8_t buf;
 size_t t = encode_varint(r, &buf); 
