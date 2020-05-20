@@ -10,11 +10,11 @@ uint8_t *r;
 r = malloc(sizeof(uint8_t) * count);
 com = malloc(sizeof(uint32_t) * size);
 uncom = malloc(sizeof(uint32_t) * size);
-FILE *f = fopen("../build/compressed.dat", "r");
+FILE *f = fopen("build/compressed.dat", "r");
 fread(r, sizeof(uint8_t), count, f);
 fclose(f);
 const uint8_t *c = r;
-f = fopen("../build/uncompressed.dat", "r");
+f = fopen("build/uncompressed.dat", "r");
 fread(uncom, sizeof(uint32_t), size, f); 
 fclose(f);
 for (i = 0; i < size; i++)
