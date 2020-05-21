@@ -1,11 +1,7 @@
 all:bin/main
 
-
-bin/main:build/src/main.o
-	gcc -Wall build/src/main.o -o bin/main
-build/src/main.o:src/main.c
-	gcc -Wall -c src/main.c -o build/src/main.o
-
+bin/main:src/main.c
+	gcc -Wall -I src src/main.c src/varint.c -o bin/main
 
 run:
 	bin/./main

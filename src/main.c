@@ -1,28 +1,31 @@
 #include "varint.h"
 #include <stdio.h>
+#include <stdlib.h>
+
 int main()
 {
-    size_t i = 0;
-    size_t count = generate();
-    uint32_t* uncom;
-    uint32_t* com;
     uint8_t* r;
-    r = malloc(sizeof(uint8_t) * count);
-    com = malloc(sizeof(uint32_t) * size);
-    uncom = malloc(sizeof(uint32_t) * size);
-    FILE* f = fopen("build/compressed.bin", "r");
-    fread(r, sizeof(uint8_t), count, f);
-    fclose(f);
+    uint32_t *uncom, *com;
+    size_t count = generate();
+    r = malloc(sizeof(uint8_t) * count);    
+    com = malloc(sizeof(uint32_t) * SIZE);
+    uncom = malloc(sizeof(uint32_t) * SIZE);
+    FILE* a = fopen("compressed.dat", "r"); // открыли файл для чтения
+    checkopen(a);                          // проверили что открытие прошло успешно 
+    fread(r, sizeof(uint8_t), count, a); // считываем данные из файла
+    fclose(a);
     const uint8_t* c = r;
-    f = fopen("build/uncompressed.bin", "r");
-    fread(uncom, sizeof(uint32_t), size, f);
-    fclose(f);
-    for (i = 0; i < size; i++) {
-        com[i] = decode_varint(&c);
+    a = fopen("uncompressed.dat", "r"); // открыл файл для чтения
+    checkopen(a);                       // проверили что открытие прошло успешно 
+    fread(uncom, sizeof(uint32_t), SIZE, a); // считываем данные из файла
+    fclose(a);
+    for (size_t i = 0; i < SIZE; i++) 
+    {
+        com[i] = decode_varint(&c); // декодируем данные, полученные из файла compressed.dat 
     }
-    match(com, uncom);
-    free(r);
+    match_check(com, uncom); // проверка что значения одинаковые в двух файлах
+    free(r);                 
     free(com);
     free(uncom);
-    return 0;
+return 0;
 }
