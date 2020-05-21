@@ -3,4 +3,5 @@ main
 *.o
 *.map
 *.obj
-*.dat
+*.bin
+a.out
