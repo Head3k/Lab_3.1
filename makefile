@@ -1,11 +1,10 @@
-all:bin/main
+all:bin/coder
 
-bin/main:src/main.c
-	gcc -Wall -I src src/main.c src/varint.c -o bin/main
-
+bin/coder:src/main.c
+	gcc -Wall -I src src/main.c  src/varint.c -o bin/coder -lm
 run:
-	bin/./main
-
-
+	./bin/coder
+	
 clean:
-	rm -rf build/src/*.o bin/main build/*.bin
+	rm -rf build/*.bin 
+	rm -rf bin/coder
